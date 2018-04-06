@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    div(class=container)
+        form(action='/result',method='post' class="form-signin" enctype='multipart/form-data')
+            div
+                input(type='file', name='file')
+            div
+                button(type='submit' for="name" class='btn btn-primary') Submit
