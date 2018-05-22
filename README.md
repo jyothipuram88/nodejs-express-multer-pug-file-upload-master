@@ -20,7 +20,7 @@ A poc for demonstrating file upload using pug-express-multer
 
 3. Load the `http://localhost:3000/` in the browser 
 
-4. Upload a sample file and enjoy :) 
+4. `upload/` folder will be created at the root of the application, if it doesn't exit. All the uploaded files will be stored in this folder. Upload a sample file and enjoy :) 
 
 ## LICENSE
 

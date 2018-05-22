@@ -1,9 +1,12 @@
 extends layout
 
 block content
-    div(class=container)
-        form(action='/result',method='post' class="form-signin" enctype='multipart/form-data')
-            div
-                input(type='file', name='file')
-            div
-                button(type='submit' for="name" class='btn btn-primary') Submit
+    h1 Nodejs express-multer-pug app
+    div(class='upload-form')
+        form(action='/result' method='post' class="form-horizontal" enctype='multipart/form-data')
+            div(class="form-group row")
+                label(for="file" class="control-label col-sm-6") Please upload a file
+                div(class="col-sm-6")
+                    input(type='file' id="file" name='file' class="form-control-file")
+            div(class="form-group row text-center")
+                button(type='submit' for="name" class='text-center btn btn-primary') Upload
