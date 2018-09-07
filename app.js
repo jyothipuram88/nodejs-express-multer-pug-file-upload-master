@@ -21,19 +21,45 @@ let multer = require('multer');
 let fs = require('fs-extra');
 let prettysize = require('prettysize');
 
+let UPLOAD_LOCATION = path.join(__dirname, 'uploads');
+fs.mkdirsSync(UPLOAD_LOCATION);
+
 let upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, callback) => {
-      let uploadLocation = path.join(__dirname, 'uploads');
-      fs.mkdirsSync(uploadLocation);
-      callback(null, uploadLocation);
+      callback(null, UPLOAD_LOCATION);
     },
     filename: (req, file, callback) => {
       //originalname is the uploaded file's name with extn
       console.log(file.originalname);
       callback(null, file.originalname);
     }
-  })
+  }),
+  fileFilter: function fileFilter(req, file, cb) {
+
+    let mmm = require('mmmagic'),
+      Magic = mmm.Magic;
+
+    let magic = new Magic(mmm.MAGIC_MIME_TYPE);
+    let fileNameWithLocation = path.join(UPLOAD_LOCATION, file.originalname);
+
+    magic.detectFile(fileNameWithLocation, function (err, mimeType) {
+        if (err) {
+          cb(err)
+        }
+
+        const ALLOWED_TYPES = [
+          'image/jpeg',
+          'image/jpg',
+          'image/tiff'
+        ];
+
+        console.log(`mimeType => ${mimeType}`);
+        cb(null, ALLOWED_TYPES.includes(mimeType));
+
+      }
+    );
+  }
 });
 
 app.get('/', function (req, res, next) {
