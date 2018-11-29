@@ -25,3 +25,5 @@ A poc for demonstrating file upload using pug-express-multer
 ## LICENSE
 
 MIT
+
+https://medium.freecodecamp.org/how-to-make-a-beautiful-tiny-npm-package-and-publish-it-2881d4307f78
